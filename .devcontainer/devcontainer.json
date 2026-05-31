@@ -1,0 +1,19 @@
+{
+  "name": "knowMe Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:0-20",
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-vscode.vscode-typescript-next"
+      ]
+    }
+  },
+  "forwardPorts": [3000],
+  "postCreateCommand": "bash -lc '[ -f package.json ] && npm install || true'",
+  "remoteUser": "root"
+}

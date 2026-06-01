@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, CalendarDays, Clock3 } from 'lucide-react'
+import { ActivityTracker } from '@/components/analytics/ActivityTracker'
 import { getAllPostsMeta, getPostBySlug } from '@/lib/posts'
 
 interface PostPageProps {
@@ -37,6 +38,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <main className="min-h-screen text-slate-100">
+      <ActivityTracker type="post_view" path={`/knowledge-base/${post.slug}`} postSlug={post.slug} />
       <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
         <article className="section-card surface-grid relative overflow-hidden rounded-3xl p-7 sm:p-10">
           <div className="ambient-orb -left-8 top-10 h-36 w-36 bg-cyan-500/30" />

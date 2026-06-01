@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
+import { ActivityTracker } from '@/components/analytics/ActivityTracker'
 import { getAllPostsMeta } from '@/lib/posts'
 
 export default function KnowledgeBasePage() {
@@ -8,6 +9,7 @@ export default function KnowledgeBasePage() {
 
   return (
     <main className="min-h-screen text-slate-100">
+      <ActivityTracker type="page_view" path="/knowledge-base" />
       <div className="mx-auto max-w-7xl px-6 py-12 md:px-8 lg:px-12">
         <section className="section-card surface-grid relative overflow-hidden rounded-[2rem] border-terminalBorder p-8">
           <div className="ambient-orb -left-10 top-12 h-44 w-44 bg-cyan-500/30" />
@@ -25,8 +27,14 @@ export default function KnowledgeBasePage() {
             {knowledgeItems.map((item) => (
               <article
                 key={item.title}
-                className="group rounded-3xl border border-slate-700/80 bg-slate-950/80 p-6 shadow-[0_20px_60px_-35px_rgba(0,0,0,0.75)] transition hover:-translate-y-1 hover:border-cyan-400/50"
+                className="group relative rounded-3xl border border-slate-700/80 bg-slate-950/80 p-6 shadow-[0_20px_60px_-35px_rgba(0,0,0,0.75)] transition hover:-translate-y-1 hover:border-cyan-400/50"
               >
+                <Link
+                  href={`/knowledge-base/${item.slug}`}
+                  aria-label={`Open post: ${item.title}`}
+                  className="absolute inset-0 z-10 rounded-3xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/70"
+                />
+
                 <div className="mb-4 overflow-hidden rounded-xl border border-slate-700/70">
                   <Image
                     src={item.imagePath}
@@ -43,10 +51,10 @@ export default function KnowledgeBasePage() {
                 </div>
                 <h3 className="mt-4 text-xl font-semibold text-slate-100">{item.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-slate-300">{item.detail}</p>
-                <Link href={`/knowledge-base/${item.slug}`} className="mt-4 inline-flex items-center gap-2 text-sm text-cyan-400 transition hover:text-cyan-300">
+                <span className="relative z-20 mt-4 inline-flex items-center gap-2 text-sm text-cyan-400 transition hover:text-cyan-300">
                   Read more
                   <ArrowUpRight size={14} />
-                </Link>
+                </span>
               </article>
             ))}
           </div>

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { Download, MapPin, Mail, Phone, ExternalLink, Award, GraduationCap } from 'lucide-react'
+import { ActivityTracker } from '@/components/analytics/ActivityTracker'
 
 const techStack: { label: string; items: string[] }[] = [
   { label: 'Cloud', items: ['AWS', 'GCP', 'Azure'] },
@@ -30,6 +31,7 @@ const fadeUp = {
 export default function AboutPage() {
   return (
     <main className="min-h-screen text-slate-100">
+      <ActivityTracker type="page_view" path="/about" />
       <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8 space-y-10">
 
         {/* ── Hero card ── */}

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Linkedin, Send, CheckCircle } from 'lucide-react'
+import { ActivityTracker } from '@/components/analytics/ActivityTracker'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -36,6 +37,7 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen text-slate-100">
+      <ActivityTracker type="page_view" path="/contact" />
       <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8 space-y-8">
 
         {/* Header */}

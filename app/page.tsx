@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowUpRight, BookOpenText, Sparkles } from 'lucide-react'
+import { ActivityTracker } from '@/components/analytics/ActivityTracker'
 import { getAllPostsMeta } from '@/lib/posts'
 
 const containerVariants = {
@@ -31,6 +32,7 @@ export default function KnowledgeBasePage() {
 
   return (
     <main className="min-h-screen text-slate-100">
+      <ActivityTracker type="page_view" path="/" />
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 md:py-12 lg:px-12">
         <motion.section
           initial={{ opacity: 0, y: 20 }}
@@ -85,8 +87,14 @@ export default function KnowledgeBasePage() {
                   y: -4,
                   boxShadow: '0 20px 60px -35px rgba(34, 211, 238, 0.3)'
                 }}
-                className="group cursor-pointer rounded-2xl border border-slate-700/80 bg-slate-950/75 p-5 transition hover:border-cyan-400/50 sm:rounded-3xl sm:p-6"
+                className="group relative cursor-pointer rounded-2xl border border-slate-700/80 bg-slate-950/75 p-5 transition hover:border-cyan-400/50 sm:rounded-3xl sm:p-6"
               >
+                <Link
+                  href={`/knowledge-base/${item.slug}`}
+                  aria-label={`Open post: ${item.title}`}
+                  className="absolute inset-0 z-10 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/70 sm:rounded-3xl"
+                />
+
                 <div className="mb-4 overflow-hidden rounded-xl border border-slate-700/70">
                   <Image
                     src={item.imagePath}
@@ -111,12 +119,12 @@ export default function KnowledgeBasePage() {
 
                 <h3 className="mt-3 text-lg font-semibold text-slate-100 transition group-hover:text-cyan-100 sm:mt-4 sm:text-xl">{item.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-slate-300 sm:mt-3 sm:leading-7">{item.detail}</p>
-                <Link href={`/knowledge-base/${item.slug}`} className="mt-3 inline-flex items-center gap-2 text-sm text-cyan-400 transition group-hover:text-cyan-300 sm:mt-4">
+                <span className="relative z-20 mt-3 inline-flex items-center gap-2 text-sm text-cyan-400 transition group-hover:text-cyan-300 sm:mt-4">
                   <motion.span whileHover={{ x: 4 }} className="inline-flex items-center gap-2">
                     Read more
                     <ArrowUpRight size={14} />
                   </motion.span>
-                </Link>
+                </span>
               </motion.article>
             ))}
           </motion.div>

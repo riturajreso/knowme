@@ -2,205 +2,150 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { Button } from '@/components/ui/Button'
+import { Mail, Phone, MapPin, Linkedin, Send, CheckCircle } from 'lucide-react'
 
-const contactMethods = [
-  {
-    label: 'Email',
-    contact: 'hello@knowme.example',
-    href: 'mailto:hello@knowme.example',
-    buttonText: 'Send Email'
-  },
-  {
-    label: 'Phone',
-    contact: '+1 (555) 123-4567',
-    href: 'tel:+15551234567',
-    buttonText: 'Call Me'
-  }
-]
-
-const infoItems = [
-  { title: 'Response Time', value: 'Within 24 hours' },
-  { title: 'Preferred Contact', value: 'Email for detailed inquiries' },
-  { title: 'Available', value: 'Mon - Fri, 9AM - 5PM EST' }
-]
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2
-    }
-  }
-}
-
-const itemVariants = {
+const fadeUp = {
   hidden: { opacity: 0, y: 20 },
-  visible: {
+  visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' }
-  }
+    transition: { duration: 0.5, delay: i * 0.1, ease: 'easeOut' },
+  }),
 }
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
+    if (!form.name || !form.email || !form.message) return
+    setStatus('sending')
+    const body = encodeURIComponent(`Name: ${form.name}\n\n${form.message}`)
+    const subject = encodeURIComponent(`Portfolio contact from ${form.name}`)
+    window.location.href = `mailto:riturajreso@gmail.com?subject=${subject}&body=${body}`
     setTimeout(() => {
-      setIsSubmitting(false)
-      setFormData({ name: '', email: '', message: '' })
-    }, 1000)
+      setStatus('sent')
+      setForm({ name: '', email: '', message: '' })
+    }, 800)
   }
 
   return (
-    <main className="min-h-screen bg-terminal text-slate-100">
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 md:py-12 lg:px-12">
-        <motion.section 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7 }}
-          className="section-card rounded-2xl sm:rounded-3xl lg:rounded-[2rem] border-terminalBorder p-6 sm:p-8"
+    <main className="min-h-screen text-slate-100">
+      <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8 space-y-8">
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="section-card surface-grid relative overflow-hidden rounded-3xl p-8 sm:p-10"
         >
-          <SectionHeading 
-            title="Contact" 
-            description="Get in touch through your preferred channel." 
-          />
-          
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="mt-8 sm:mt-12 grid gap-6 sm:gap-8 grid-cols-1 lg:grid-cols-2"
-          >
-            <div className="space-y-4 sm:space-y-6">
-              {contactMethods.map((method, index) => (
-                <motion.div
-                  key={method.label}
-                  variants={itemVariants}
-                  whileHover={{ y: -4 }}
-                  className="rounded-2xl sm:rounded-3xl border border-slate-700/80 bg-slate-950/80 p-5 sm:p-6 shadow-[0_20px_60px_-35px_rgba(0,0,0,0.75)] transition"
-                >
-                  <motion.p 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.3 + index * 0.1 }}
-                    className="text-xs sm:text-sm uppercase tracking-[0.25em] text-cyan-300/80 mb-3 sm:mb-4"
-                  >
-                    {method.label}
-                  </motion.p>
-                  <p className="text-xl sm:text-2xl font-mono text-cyan-200 break-all mb-3 sm:mb-4">{method.contact}</p>
-                  <Button href={method.href} variant="primary" className="w-full justify-center text-sm sm:text-base">
-                    {method.buttonText}
-                  </Button>
-                </motion.div>
-              ))}
-            </div>
+          <div className="ambient-orb -left-24 -top-24 h-72 w-72 bg-cyan-500/30" />
+          <div className="ambient-orb -bottom-8 right-8 h-40 w-40 bg-orange-400/25 [animation-delay:1.4s]" />
+          <p className="text-xs uppercase tracking-[0.35em] text-cyan-400/70 mb-2">Get in touch</p>
+          <h1 className="text-3xl sm:text-4xl font-bold text-slate-50 tracking-tight">Contact Me</h1>
+          <p className="mt-3 text-slate-400 text-sm sm:text-base leading-7 max-w-xl">
+            I am open to discussions about cloud architecture, AI systems, collaborations, or just a technical chat. Pick any channel below.
+          </p>
 
-            <motion.div 
-              variants={itemVariants}
-              whileHover={{ y: -4 }}
-              className="rounded-2xl sm:rounded-3xl border border-slate-700/80 bg-slate-950/80 p-5 sm:p-6 shadow-[0_20px_60px_-35px_rgba(0,0,0,0.75)] transition"
-            >
-              <p className="text-xs sm:text-sm uppercase tracking-[0.25em] text-cyan-300/80 mb-4 sm:mb-6">Quick message</p>
-              <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
-                <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  <label className="block text-xs sm:text-sm text-slate-300 mb-2">Your Name</label>
-                  <input 
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="John Doe" 
-                    className="w-full rounded-lg border border-slate-600 bg-slate-900/50 px-3 sm:px-4 py-2 text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none transition text-sm"
-                  />
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4 }}
-                >
-                  <label className="block text-xs sm:text-sm text-slate-300 mb-2">Your Email</label>
-                  <input 
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="you@example.com" 
-                    className="w-full rounded-lg border border-slate-600 bg-slate-900/50 px-3 sm:px-4 py-2 text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none transition text-sm"
-                  />
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  <label className="block text-xs sm:text-sm text-slate-300 mb-2">Message</label>
-                  <textarea 
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Your message..." 
-                    rows={3}
-                    className="w-full rounded-lg border border-slate-600 bg-slate-900/50 px-3 sm:px-4 py-2 text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none transition text-sm"
-                  />
-                </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Button 
-                    className="w-full justify-center text-sm sm:text-base"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </Button>
-                </motion.div>
-              </form>
-            </motion.div>
-          </motion.div>
+          <div className="relative mt-7 flex flex-wrap gap-3">
+            <a href="mailto:riturajreso@gmail.com" className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/60 px-4 py-2.5 text-sm text-slate-300 hover:border-cyan-500/60 hover:text-cyan-300 transition">
+              <Mail size={14} className="text-cyan-500" />riturajreso@gmail.com
+            </a>
+            <a href="tel:+918582949025" className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/60 px-4 py-2.5 text-sm text-slate-300 hover:border-cyan-500/60 hover:text-cyan-300 transition">
+              <Phone size={14} className="text-cyan-500" />+91-8582949025
+            </a>
+            <span className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/60 px-4 py-2.5 text-sm text-slate-400">
+              <MapPin size={14} className="text-cyan-500" />Bangalore, India
+            </span>
+            <a href="https://www.linkedin.com/in/riturajreso/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/60 px-4 py-2.5 text-sm text-slate-300 hover:border-cyan-500/60 hover:text-cyan-300 transition">
+              <Linkedin size={14} className="text-cyan-500" />LinkedIn
+            </a>
+          </div>
+        </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+        {/* Form + sidebar */}
+        <div className="grid gap-6 lg:grid-cols-[1fr_300px]">
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="mt-8 sm:mt-12 rounded-2xl sm:rounded-3xl border border-slate-700/80 bg-slate-900/50 p-5 sm:p-6"
+            transition={{ duration: 0.55, delay: 0.15 }}
+            className="section-card rounded-3xl p-8"
           >
-            <p className="text-xs sm:text-sm uppercase tracking-[0.25em] text-cyan-300/80 mb-4 sm:mb-6">Quick Info</p>
-            <motion.div 
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-3 text-xs sm:text-sm text-slate-300"
-            >
-              {infoItems.map((item) => (
-                <motion.div
-                  key={item.title}
-                  variants={itemVariants}
-                  className="rounded-lg border border-slate-700/50 bg-slate-900/50 p-3 sm:p-4"
-                >
-                  <p className="text-cyan-300 font-medium mb-1 sm:mb-2">{item.title}</p>
-                  <p className="text-slate-400">{item.value}</p>
-                </motion.div>
-              ))}
-            </motion.div>
+            <p className="text-xs uppercase tracking-[0.3em] text-cyan-400/70 mb-6">Send a message</p>
+
+            {status === 'sent' ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="flex flex-col items-center justify-center gap-4 py-12 text-center"
+              >
+                <CheckCircle size={40} className="text-cyan-400" />
+                <p className="text-slate-100 font-semibold">Message ready to send!</p>
+                <p className="text-sm text-slate-400">Your email client should have opened. Hit send there to complete it.</p>
+                <button onClick={() => setStatus('idle')} className="mt-2 text-xs text-cyan-400 hover:text-cyan-300 transition underline underline-offset-4">
+                  Send another
+                </button>
+              </motion.div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label className="block text-xs text-slate-400 mb-1.5">Your name</label>
+                    <input type="text" name="name" value={form.name} onChange={handleChange} required placeholder="Jane Smith"
+                      className="w-full rounded-xl border border-slate-700 bg-slate-900/60 px-4 py-2.5 text-sm text-slate-100 placeholder-slate-600 focus:border-cyan-500 focus:outline-none transition" />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-slate-400 mb-1.5">Your email</label>
+                    <input type="email" name="email" value={form.email} onChange={handleChange} required placeholder="you@example.com"
+                      className="w-full rounded-xl border border-slate-700 bg-slate-900/60 px-4 py-2.5 text-sm text-slate-100 placeholder-slate-600 focus:border-cyan-500 focus:outline-none transition" />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs text-slate-400 mb-1.5">Message</label>
+                  <textarea name="message" value={form.message} onChange={handleChange} required rows={5} placeholder="What would you like to discuss?"
+                    className="w-full rounded-xl border border-slate-700 bg-slate-900/60 px-4 py-2.5 text-sm text-slate-100 placeholder-slate-600 focus:border-cyan-500 focus:outline-none transition resize-none" />
+                </div>
+                <motion.button type="submit" disabled={status === 'sending'} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-cyan-500 px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-500/25 transition hover:bg-cyan-400 disabled:opacity-60">
+                  <Send size={14} />
+                  {status === 'sending' ? 'Opening email...' : 'Send Message'}
+                </motion.button>
+                <p className="text-xs text-slate-500 text-center">This opens your email client with the message pre-filled.</p>
+              </form>
+            )}
           </motion.div>
-        </motion.section>
+
+          <div className="flex flex-col gap-5">
+            {[
+              { label: 'Response time', value: 'Within 24 hours' },
+              { label: 'Best for', value: 'Cloud architecture, AI systems, and collaborations' },
+              { label: 'Available', value: 'Mon - Fri, IST' },
+            ].map(({ label, value }, i) => (
+              <motion.div key={label} custom={i} variants={fadeUp} initial="hidden" animate="visible" className="section-card rounded-2xl px-5 py-4">
+                <p className="text-xs uppercase tracking-widest text-slate-500 mb-1">{label}</p>
+                <p className="text-sm text-slate-300">{value}</p>
+              </motion.div>
+            ))}
+
+            <motion.div custom={3} variants={fadeUp} initial="hidden" animate="visible" className="section-card rounded-2xl px-5 py-5 space-y-3">
+              <p className="text-xs uppercase tracking-widest text-slate-500">Direct links</p>
+              <a href="mailto:riturajreso@gmail.com" className="flex items-center gap-2 text-sm text-slate-300 hover:text-cyan-300 transition">
+                <Mail size={14} className="text-cyan-500 shrink-0" />riturajreso@gmail.com
+              </a>
+              <a href="https://www.linkedin.com/in/riturajreso/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-slate-300 hover:text-cyan-300 transition">
+                <Linkedin size={14} className="text-cyan-500 shrink-0" />linkedin.com/in/riturajreso
+              </a>
+            </motion.div>
+          </div>
+
+        </div>
       </div>
     </main>
   )

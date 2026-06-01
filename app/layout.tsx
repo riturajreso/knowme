@@ -1,19 +1,19 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Space_Grotesk } from 'next/font/google'
 import { Navbar } from '@/components/Navbar'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space-grotesk' })
 
 export const metadata: Metadata = {
-  title: 'knowMe | Terminal Portfolio',
-  description: 'A terminal-themed portfolio with knowledge base, about, and contact sections.'
+  title: 'knowMe | Cloud and AI Portfolio',
+  description: 'A modern portfolio with a technical knowledge base, professional profile, and direct contact experience.'
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.className}>
-      <body className="bg-terminal text-slate-100">
+    <html lang="en" className={spaceGrotesk.className}>
+      <body className="text-slate-100">
         <Navbar />
         {children}
       </body>

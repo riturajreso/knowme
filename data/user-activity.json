@@ -1,0 +1,40 @@
+[
+  {
+    "id": "5b236abc-d8eb-4291-ad16-d000b752497b",
+    "createdAt": "2026-06-01T15:24:08.328Z",
+    "type": "page_view",
+    "path": "/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "cf2dc3b3-eb7a-4edc-a12e-da6e8627811f",
+    "createdAt": "2026-06-01T15:24:08.633Z",
+    "type": "page_view",
+    "path": "/about",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "a3d961bc-b138-467c-ba67-7e2ed847a50a",
+    "createdAt": "2026-06-01T15:24:09.371Z",
+    "type": "page_view",
+    "path": "/contact",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "e84ea0a2-41ee-4a6b-823c-a730e746dfe6",
+    "createdAt": "2026-06-01T15:27:31.143Z",
+    "type": "post_view",
+    "path": "/knowledge-base/building-cloudiq-rag-workflow-automation",
+    "postSlug": "building-cloudiq-rag-workflow-automation",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "373868d8-8926-421e-9ad7-a1193420b42b",
+    "createdAt": "2026-06-01T15:29:47.815Z",
+    "type": "post_view",
+    "path": "/knowledge-base/mcp-a2a-multi-agent-cloud-platforms",
+    "postSlug": "mcp-a2a-multi-agent-cloud-platforms",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+    "ipAddress": "::ffff:127.0.0.1"
+  }
+]

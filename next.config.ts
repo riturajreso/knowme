@@ -6,6 +6,11 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion']
+  },
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: '**' }
+    ]
   }
 }
 

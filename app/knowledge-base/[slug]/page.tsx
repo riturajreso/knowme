@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, CalendarDays, Clock3 } from 'lucide-react'
 import { ActivityTracker } from '@/components/analytics/ActivityTracker'
+import { MarkdownContent } from '@/components/MarkdownContent'
 import { getAllPostsMeta, getPostBySlug } from '@/lib/posts'
 
 interface PostPageProps {
@@ -81,42 +82,10 @@ export default async function PostPage({ params }: PostPageProps) {
               />
             </div>
 
-            <p className="mt-5 text-base leading-8 text-slate-300">{post.intro}</p>
+            <p className="mt-5 text-base leading-8 text-slate-300">{post.detail}</p>
 
-            <div className="mt-10 space-y-10">
-              {post.sections.map(section => (
-                <section key={section.heading} className="space-y-4">
-                  <h2 className="text-2xl font-semibold text-slate-100">{section.heading}</h2>
-
-                  {section.imagePath && (
-                    <div className="overflow-hidden rounded-2xl border border-slate-700/70">
-                      <Image
-                        src={section.imagePath}
-                        alt={section.heading}
-                        width={1200}
-                        height={700}
-                        className="h-52 w-full object-cover sm:h-64"
-                      />
-                    </div>
-                  )}
-
-                  {section.paragraphs.map(paragraph => (
-                    <p key={paragraph} className="text-sm leading-8 text-slate-300 sm:text-base">
-                      {paragraph}
-                    </p>
-                  ))}
-                  {section.bullets && section.bullets.length > 0 && (
-                    <ul className="space-y-2 pt-1">
-                      {section.bullets.map(bullet => (
-                        <li key={bullet} className="flex gap-3 text-sm leading-7 text-slate-300 sm:text-base">
-                          <span className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-400" />
-                          {bullet}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </section>
-              ))}
+            <div className="mt-10">
+              <MarkdownContent content={post.content} />
             </div>
           </div>
         </article>

@@ -35,16 +35,6 @@ resource "google_project_service" "cloud_run" {
   disable_on_destroy = false
 }
 
-resource "google_project_service" "container_registry" {
-  service            = "containerregistry.googleapis.com"
-  disable_on_destroy = false
-}
-
-resource "google_project_service" "compute" {
-  service            = "compute.googleapis.com"
-  disable_on_destroy = false
-}
-
 resource "google_project_service" "dns" {
   service            = "dns.googleapis.com"
   disable_on_destroy = false
@@ -84,8 +74,8 @@ resource "google_cloud_run_service" "knowme" {
 
     metadata {
       annotations = {
-        "autoscaling.knative.dev/maxScale" = "100"
-        "autoscaling.knative.dev/minScale" = "1"
+        "autoscaling.knative.dev/maxScale" = tostring(var.max_instances)
+        "autoscaling.knative.dev/minScale" = tostring(var.min_instances)
       }
     }
   }
@@ -110,24 +100,6 @@ resource "google_cloud_run_service_iam_member" "invoker" {
 resource "google_service_account" "cloud_run" {
   account_id   = "${var.service_name}-sa"
   display_name = "Cloud Run Service Account for ${var.service_name}"
-}
-
-# Artifact Registry Repository
-resource "google_artifact_registry_repository" "knowme" {
-  location      = var.gcp_region
-  repository_id = "${var.service_name}-repo"
-  description   = "Docker repository for knowMe portfolio"
-  format        = "DOCKER"
-
-  depends_on = [google_project_service.container_registry]
-}
-
-# IAM: Allow Cloud Run to pull from Artifact Registry
-resource "google_artifact_registry_repository_iam_member" "cloud_run_pull" {
-  location   = google_artifact_registry_repository.knowme.location
-  repository = google_artifact_registry_repository.knowme.name
-  role       = "roles/artifactregistry.reader"
-  member     = "serviceAccount:${google_service_account.cloud_run.email}"
 }
 
 # Cloud DNS Zone
@@ -171,73 +143,4 @@ resource "google_dns_record_set" "knowme_aaaa" {
   depends_on = [google_cloud_run_domain_mapping.knowme]
 }
 
-# Cloud Storage Bucket for backups/assets (optional)
-resource "google_storage_bucket" "knowme_assets" {
-  name          = "${var.gcp_project_id}-${var.service_name}-assets"
-  location      = var.gcp_region
-  force_destroy = false
 
-  uniform_bucket_level_access = true
-
-  versioning {
-    enabled = true
-  }
-}
-
-# Monitoring Alert Policy
-resource "google_monitoring_alert_policy" "cloud_run_high_latency" {
-  display_name = "Cloud Run ${var.service_name} - High Latency Alert"
-
-  conditions {
-    display_name = "Response time > 1s"
-
-    condition_threshold {
-      filter          = "resource.type=\"cloud_run_revision\" AND metric.type=\"run.googleapis.com/request_latencies\" AND resource.labels.service_name=\"${google_cloud_run_service.knowme.name}\""
-      duration        = "300s"
-      comparison      = "COMPARISON_GT"
-      threshold_value = 1000
-
-      aggregations {
-        alignment_period  = "60s"
-        per_series_aligner = "ALIGN_DELTA"
-      }
-    }
-  }
-
-  notification_channels = []
-  
-  alert_strategy {
-    notification_rate_limit {
-      period = "300s"
-    }
-  }
-}
-
-# Monitoring Alert for Cloud Run errors
-resource "google_monitoring_alert_policy" "cloud_run_errors" {
-  display_name = "Cloud Run ${var.service_name} - High Error Rate"
-
-  conditions {
-    display_name = "Error rate > 5%"
-
-    condition_threshold {
-      filter          = "resource.type=\"cloud_run_revision\" AND metric.type=\"run.googleapis.com/request_count\" AND metric.labels.response_code_class=\"5xx\" AND resource.labels.service_name=\"${google_cloud_run_service.knowme.name}\""
-      duration        = "60s"
-      comparison      = "COMPARISON_GT"
-      threshold_value = 50
-
-      aggregations {
-        alignment_period   = "60s"
-        per_series_aligner = "ALIGN_RATE"
-      }
-    }
-  }
-
-  notification_channels = []
-
-  alert_strategy {
-    notification_rate_limit {
-      period = "300s"
-    }
-  }
-}

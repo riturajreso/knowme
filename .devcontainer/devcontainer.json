@@ -2,7 +2,9 @@
   "name": "knowMe Dev Container",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:0-20",
   "features": {
-    "ghcr.io/devcontainers/features/git:1": {}
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/terraform:1": {},
+    "ghcr.io/siri404/devcontainer-ai-features/gcloud:1": {}
   },
   "customizations": {
     "vscode": {

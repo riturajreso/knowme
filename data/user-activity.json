@@ -36,5 +36,29 @@
     "postSlug": "mcp-a2a-multi-agent-cloud-platforms",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
     "ipAddress": "::ffff:127.0.0.1"
+  },
+  {
+    "id": "8ec929ec-96c8-49a7-9b26-9fd974e12ec6",
+    "createdAt": "2026-06-06T09:15:29.115Z",
+    "type": "page_view",
+    "path": "/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+    "ipAddress": "::1"
+  },
+  {
+    "id": "b3e4f4cf-1fd9-4b3c-aa84-f3d4c41d7523",
+    "createdAt": "2026-06-06T09:15:38.607Z",
+    "type": "page_view",
+    "path": "/about",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+    "ipAddress": "::1"
+  },
+  {
+    "id": "1dc3fe3b-9c65-43e4-8482-8c926fcd7394",
+    "createdAt": "2026-06-06T09:15:44.039Z",
+    "type": "page_view",
+    "path": "/contact",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+    "ipAddress": "::1"
   }
 ]

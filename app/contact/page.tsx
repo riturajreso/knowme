@@ -80,7 +80,7 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.15 }}
           >
-            <WobblyBorder size="lg" decoration="tack">
+            <WobblyBorder size="lg">
               <div className="p-8" style={{ borderRadius: BORDER_RADIUS.wobblyMd }}>
                 <p className="text-xs uppercase tracking-[0.3em] text-marker-blue mb-6">Send a message</p>
 

@@ -5,6 +5,8 @@ import { notFound } from 'next/navigation'
 import { ArrowLeft, CalendarDays, Clock3 } from 'lucide-react'
 import { ActivityTracker } from '@/components/analytics/ActivityTracker'
 import { MarkdownContent } from '@/components/MarkdownContent'
+import { WobblyBorder } from '@/components/ui/Decorations'
+import { BORDER_RADIUS } from '@/lib/design-tokens'
 import { getAllPostsMeta, getPostBySlug } from '@/lib/posts'
 
 interface PostPageProps {
@@ -38,24 +40,21 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   return (
-    <main className="min-h-screen text-slate-100">
+    <main className="min-h-screen text-pencil">
       <ActivityTracker type="post_view" path={`/knowledge-base/${post.slug}`} postSlug={post.slug} />
       <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
-        <article className="section-card surface-grid relative overflow-hidden rounded-3xl p-7 sm:p-10">
-          <div className="ambient-orb -left-8 top-10 h-36 w-36 bg-cyan-500/30" />
-          <div className="ambient-orb -right-8 bottom-12 h-32 w-32 bg-orange-400/25 [animation-delay:1.1s]" />
-
-          <div className="relative">
-            <Link href="/knowledge-base" className="inline-flex items-center gap-2 text-sm text-cyan-300 transition hover:text-cyan-200">
+        <WobblyBorder size="xl">
+          <article className="p-7 sm:p-10" style={{ borderRadius: BORDER_RADIUS.wobblyMd }}>
+            <Link href="/knowledge-base" className="inline-flex items-center gap-2 text-sm text-marker-blue transition hover:-translate-x-1">
               <ArrowLeft size={15} />
               Back to all posts
             </Link>
 
             <div className="mt-5 flex flex-wrap items-center gap-3 text-xs">
-              <span className="rounded-full border border-cyan-500/35 bg-cyan-500/10 px-3 py-1 uppercase tracking-[0.24em] text-cyan-300">
+              <span className="rounded-full border-2 border-pencil bg-paper-200 px-3 py-1 uppercase tracking-[0.24em] text-marker-blue">
                 {post.tag}
               </span>
-              <span className="inline-flex items-center gap-1.5 text-slate-400">
+              <span className="inline-flex items-center gap-1.5 text-pencil-light">
                 <CalendarDays size={13} />
                 {new Date(post.date).toLocaleDateString('en-US', {
                   year: 'numeric',
@@ -63,15 +62,15 @@ export default async function PostPage({ params }: PostPageProps) {
                   day: 'numeric'
                 })}
               </span>
-              <span className="inline-flex items-center gap-1.5 text-slate-400">
+              <span className="inline-flex items-center gap-1.5 text-pencil-light">
                 <Clock3 size={13} />
                 {post.readTime}
               </span>
             </div>
 
-            <h1 className="mt-4 text-3xl font-semibold leading-tight text-slate-100 sm:text-4xl">{post.title}</h1>
+            <h1 className="mt-4 text-3xl font-semibold leading-tight text-pencil sm:text-4xl">{post.title}</h1>
 
-            <div className="mt-6 overflow-hidden rounded-2xl border border-slate-700/70">
+            <div className="mt-6 overflow-hidden border-2 border-pencil" style={{ borderRadius: BORDER_RADIUS.wobblySmall }}>
               <Image
                 src={post.imagePath}
                 alt={post.title}
@@ -82,13 +81,13 @@ export default async function PostPage({ params }: PostPageProps) {
               />
             </div>
 
-            <p className="mt-5 text-base leading-8 text-slate-300">{post.detail}</p>
+            <p className="mt-5 text-base leading-8 text-pencil-light">{post.detail}</p>
 
-            <div className="mt-10">
+            <div className="mt-10 border-t-2 border-dashed border-pencil pt-8">
               <MarkdownContent content={post.content} />
             </div>
-          </div>
-        </article>
+          </article>
+        </WobblyBorder>
       </div>
     </main>
   )

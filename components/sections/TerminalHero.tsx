@@ -29,7 +29,7 @@ export function TerminalHero() {
                   letterSpacing: '0.15em'
                 }}
               >
-                ✏️ hand-drawn portfolio
+                ✏️ engineer, builder, problem solver
               </p>
             </div>
 
@@ -43,7 +43,7 @@ export function TerminalHero() {
                   lineHeight: 1.2,
                 }}
               >
-                Know{' '}
+                Hi, I&apos;m{' '}
                 <span 
                   style={{
                     color: '#ff4d4d',
@@ -51,7 +51,7 @@ export function TerminalHero() {
                     transform: 'rotate(-3deg)',
                   }}
                 >
-                  Me.
+                  Ritu Raj.
                 </span>
               </h1>
               <p 
@@ -62,7 +62,7 @@ export function TerminalHero() {
                   maxWidth: '90%'
                 }}
               >
-                Your technical knowledge base, experience story, and direct line to a Senior Cloud DevOps & AI Solutions Engineer.
+                I build multi-agent AI systems and multi-cloud platforms that ship to production with strong evals, practical LLMOps, and human-in-the-loop reliability.
               </p>
             </div>
 
@@ -82,11 +82,11 @@ export function TerminalHero() {
               <div className="grid grid-cols-2 gap-6 text-sm">
                 <div>
                   <p className="font-bold text-lg" style={{ color: '#ff4d4d' }}>10+</p>
-                  <p style={{ color: '#5a5a5a' }}>Years Experience</p>
+                  <p style={{ color: '#5a5a5a' }}>Years shaping systems</p>
                 </div>
                 <div>
                   <p className="font-bold text-lg" style={{ color: '#2d5da1' }}>50+</p>
-                  <p style={{ color: '#5a5a5a' }}>Projects Built</p>
+                  <p style={{ color: '#5a5a5a' }}>Projects delivered</p>
                 </div>
               </div>
             </div>
@@ -114,7 +114,7 @@ export function TerminalHero() {
                     color: '#2d2d2d',
                   }}
                 >
-                  Quick Access
+                  Start Here
                 </h3>
                 
                 <div className="space-y-3">
@@ -131,7 +131,7 @@ export function TerminalHero() {
                   >
                     <p className="font-bold text-sm">📚 Knowledge Base</p>
                     <p className="text-xs mt-1" style={{ color: '#5a5a5a' }}>
-                      Curated posts on cloud, AI, and DevOps patterns
+                      Notes, case studies, and lessons from cloud, AI, and DevOps work
                     </p>
                   </Link>
 
@@ -148,7 +148,7 @@ export function TerminalHero() {
                   >
                     <p className="font-bold text-sm">👤 About Me</p>
                     <p className="text-xs mt-1" style={{ color: '#5a5a5a' }}>
-                      Story, skills, and technical background
+                      What I build, how I think, and the experience behind it
                     </p>
                   </Link>
                 </div>
@@ -156,7 +156,7 @@ export function TerminalHero() {
             </WobblyBorder>
 
             {/* Featured Stat Card */}
-            <WobblyBorder size="lg" decoration="tack">
+            <WobblyBorder size="lg">
               <div 
                 className="p-6 sm:p-8 text-center"
                 style={{
@@ -165,7 +165,7 @@ export function TerminalHero() {
                 }}
               >
                 <p className="text-xs uppercase tracking-widest" style={{ color: '#5a5a5a' }}>
-                  Currently Building
+                  Current Focus
                 </p>
                 <h2 
                   className="text-2xl font-bold mt-2"
@@ -177,7 +177,7 @@ export function TerminalHero() {
                   Multi-Agent AI Systems
                 </h2>
                 <p className="text-sm mt-3" style={{ color: '#5a5a5a' }}>
-                  Exploring MCP architectures and A2A cloud automation
+                  Exploring MCP architectures and A2A automation for cloud workflows
                 </p>
               </div>
             </WobblyBorder>

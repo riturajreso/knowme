@@ -36,7 +36,7 @@ export default function AboutPage() {
     <main className="min-h-screen text-pencil">
       <ActivityTracker type="page_view" path="/about" />
       <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8 space-y-10">
-        <SectionHeading title="About" description="Cloud, AI, and systems engineering with a human-centered approach." />
+        <SectionHeading title="About" description="A personal view into how I think, build, and solve problems across cloud, AI, and systems engineering." />
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -72,13 +72,13 @@ export default function AboutPage() {
 
               <div className="mt-7 space-y-4 border-l-[3px] border-marker-red pl-5 text-sm leading-7 text-pencil-light sm:text-base">
                 <p>
-                  I have 10+ years of experience in cloud infrastructure, AI systems, and DevOps automation. I focus on finding where teams waste time and money in cloud operations, then building systems that fix those problems for good.
+                  I am a Senior Cloud DevOps and AI Solutions Engineer with 10+ years of experience building production-grade cloud platforms, automation systems, and AI-enabled operations.
                 </p>
                 <p>
-                  At Ciena, I built <span className="text-marker-blue font-medium">CloudIQ</span> from the ground up as the core AI platform for cloud operations, expanding from FinOps into security, reliability, and multi-cloud guidance.
+                  Earlier in my career, I worked deeply on server architecture, primarily on AWS, and built a strong foundation in clean system design using SOLID principles.
                 </p>
                 <p>
-                  Right now, I am focused on <span className="text-marker-blue font-medium">Agentic AI</span> using MCP and A2A patterns. I hold <span className="text-marker-blue font-medium">6 Anthropic AI certifications</span> and lead 4 of 9 AI initiatives in my organization.
+                  Today, I focus on <span className="text-marker-blue font-medium">Agent Harness</span> and <span className="text-marker-blue font-medium">Agentic AI</span> with MCP and A2A patterns, while applying a zero-trust mindset and designing systems to reduce blast radius through strong isolation, least privilege, and safe rollout practices.
                 </p>
               </div>
             </div>
@@ -90,7 +90,7 @@ export default function AboutPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
-          <WobblyBorder size="lg" decoration="tack">
+          <WobblyBorder size="lg">
             <div className="p-8" style={{ borderRadius: BORDER_RADIUS.wobblyMd }}>
               <h2 className="flex items-center gap-2 text-sm uppercase tracking-[0.3em] text-marker-blue mb-6">
                 <span className="h-px w-6 bg-marker-blue/50" /> Technical Expertise
@@ -101,7 +101,7 @@ export default function AboutPage() {
                     <p className="text-xs font-semibold uppercase tracking-widest text-pencil-light mb-2">{group.label}</p>
                     <div className="flex flex-wrap gap-2">
                       {group.items.map(item => (
-                        <span key={item} className="rounded-full border-2 border-pencil bg-paper-200 px-3 py-1 text-xs text-pencil transition hover:-rotate-1">
+                          <span key={item} className="rounded-full border-2 border-pencil bg-paper-200 px-3 py-1 text-xs text-pencil transition hover:-rotate-1">
                           {item}
                         </span>
                       ))}

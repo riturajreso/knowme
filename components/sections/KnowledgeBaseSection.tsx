@@ -29,7 +29,6 @@ export function KnowledgeBaseSection() {
             <WobblyBorder 
               key={item.title}
               size="lg"
-              decoration={idx === 0 ? 'tack' : idx === 1 ? 'tape' : 'none'}
               className="transition hover:-rotate-1"
             >
               <div className="p-6 sm:p-8 h-full flex flex-col" style={{ borderRadius: BORDER_RADIUS.wobblyMd }}>

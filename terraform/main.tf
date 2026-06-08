@@ -9,7 +9,7 @@ terraform {
       version = "~> 5.0"
     }
   }
-  
+
   backend "local" {
     path = "terraform.tfstate"
   }
@@ -85,4 +85,18 @@ resource "google_cloud_run_v2_service_iam_member" "invoker" {
 # The app is accessible via the Cloud Run URL output.
 
 
+resource "google_cloud_run_domain_mapping" "knowme" {
+  name     = "know-rituraj.info"
+  location = var.gcp_region
+
+  metadata {
+    namespace = var.gcp_project_id
+  }
+
+  spec {
+    route_name = google_cloud_run_v2_service.knowme.name
+  }
+
+  depends_on = [google_cloud_run_v2_service.knowme]
+}
 

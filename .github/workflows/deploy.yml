@@ -19,7 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       image-tag: ${{ steps.image.outputs.tag }}
-      gcp-project-id: ${{ secrets.GCP_PROJECT_ID }}
     steps:
       - name: Generate image tag
         id: image
@@ -50,7 +49,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          push: true
+          push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
           tags: |
             ${{ needs.setup.outputs.image-tag }}
             ${{ env.IMAGE_NAME }}:latest
@@ -87,7 +86,7 @@ jobs:
             --allow-unauthenticated \
             --memory 512Mi \
             --cpu 1 \
-            --max-instances 10 \
+            --max-instances 2 \
             --min-instances 0 \
             --timeout 300 \
             --set-env-vars NODE_ENV=production \

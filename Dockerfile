@@ -1,5 +1,5 @@
 # Multi-stage build for optimized Docker image
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
@@ -17,7 +17,10 @@ COPY . .
 RUN npm run build
 
 # Production runtime stage
-FROM node:18-alpine
+FROM node:20-alpine
+
+# Run as non-root user to reduce blast radius
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 WORKDIR /app
 
@@ -26,9 +29,11 @@ ENV NODE_ENV=production
 ENV PORT=3000
 
 # Copy built application from builder
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder --chown=appuser:appgroup /app/.next/standalone ./
+COPY --from=builder --chown=appuser:appgroup /app/public ./public
+COPY --from=builder --chown=appuser:appgroup /app/.next/static ./.next/static
+
+USER appuser
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \

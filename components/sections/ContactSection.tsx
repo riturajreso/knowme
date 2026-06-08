@@ -1,28 +1,47 @@
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Button } from '@/components/ui/Button'
+import { WobblyBorder } from '@/components/ui/Decorations'
+import { BORDER_RADIUS } from '@/lib/design-tokens'
 
 export function ContactSection() {
   return (
-    <section id="contact" className="section-card rounded-[2rem] border-terminalBorder p-8">
-      <SectionHeading title="Contact" description="Connect through a terminal-inspired channel." />
-      <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="space-y-5 text-slate-300">
-          <p>
-            Ready to turn your expertise into a strong personal brand? Share a project, ask a question, or request a technical write-up directly from the portfolio.
-          </p>
-          <div className="rounded-3xl border border-slate-700/80 bg-slate-900/80 p-6 text-sm text-slate-300">
-            <p className="font-medium text-slate-100">Reach me at</p>
-            <p className="mt-3 break-words text-cyan-200">hello@knowme.example</p>
+    <section id="contact" className="px-4 sm:px-6 py-12 sm:py-16">
+      <div className="mx-auto max-w-5xl">
+        <SectionHeading title="Contact" description="Let's collaborate on something creative." />
+        <div className="mt-12 grid gap-8 lg:grid-cols-2 items-start">
+          <div className="space-y-6">
+            <p className="text-lg leading-relaxed" style={{ color: '#5a5a5a' }}>
+              Have an idea? Want to discuss cloud architecture, AI systems, or DevOps practices? I'm always open to conversations with creative teams, technical collaborators, and fellow builders.
+            </p>
+            <div>
+              <p className="text-sm uppercase tracking-widest" style={{ color: '#2d5da1', fontWeight: 700 }}>✉️ Email</p>
+              <p className="text-xl font-bold mt-2" style={{ color: '#2d2d2d' }}>riturajreso@gmail.com</p>
+            </div>
           </div>
-        </div>
-        <div className="rounded-3xl border border-slate-700/80 bg-slate-950/80 p-6 shadow-[0_25px_75px_-45px_rgba(0,0,0,0.75)]">
-          <p className="text-sm uppercase tracking-[0.32em] text-cyan-300/80">send a quick note</p>
-          <p className="mt-5 text-sm leading-7 text-slate-300">
-            If you'd like, simply send a message to the address above or use a contact form integration later for immediate responses.
-          </p>
-          <Button href="mailto:hello@knowme.example" className="mt-6 w-full justify-center">
-            Email me
-          </Button>
+
+          {/* CTA Card */}
+          <WobblyBorder size="lg" decoration="tape">
+            <div className="p-8 space-y-6" style={{ borderRadius: BORDER_RADIUS.wobblyMd, background: '#fff9c4' }}>
+              <div>
+                <p className="text-sm uppercase tracking-widest" style={{ color: '#2d5da1', fontWeight: 700 }}>→ quick start</p>
+                <h3 
+                  className="text-2xl font-bold mt-2"
+                  style={{
+                    fontFamily: '"Kalam", cursive',
+                    color: '#2d2d2d',
+                  }}
+                >
+                  Send me a message
+                </h3>
+              </div>
+              <p className="text-base" style={{ color: '#5a5a5a' }}>
+                Drop a line about your project, question, or collaboration idea. I'll respond within 48 hours.
+              </p>
+              <Button href="mailto:riturajreso@gmail.com" variant="primary" className="w-full justify-center">
+                Email me
+              </Button>
+            </div>
+          </WobblyBorder>
         </div>
       </div>
     </section>

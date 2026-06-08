@@ -5,21 +5,21 @@ import Image from 'next/image'
 
 export function MarkdownContent({ content }: { content: string }) {
   return (
-    <div className="prose prose-invert prose-cyan max-w-none
-      prose-headings:text-slate-100 prose-headings:font-semibold
-      prose-p:text-slate-300 prose-p:leading-8
-      prose-li:text-slate-300
-      prose-strong:text-slate-100
-      prose-code:text-cyan-300 prose-code:bg-slate-800/60 prose-code:rounded prose-code:px-1.5 prose-code:py-0.5
-      prose-pre:bg-slate-800/60 prose-pre:border prose-pre:border-slate-700/70
-      prose-a:text-cyan-400
-      prose-hr:border-slate-700
-      prose-ul:text-slate-300
-      prose-ol:text-slate-300">
+    <div className="prose max-w-none
+      prose-headings:text-pencil prose-headings:font-bold
+      prose-p:text-pencil-light prose-p:leading-8
+      prose-li:text-pencil-light
+      prose-strong:text-pencil
+      prose-code:text-marker-blue prose-code:bg-paper-300 prose-code:rounded prose-code:px-1.5 prose-code:py-0.5 prose-code:before:content-none prose-code:after:content-none
+      prose-pre:bg-paper-300 prose-pre:border prose-pre:border-pencil prose-pre:text-pencil
+      prose-a:text-marker-blue
+      prose-hr:border-pencil
+      prose-ul:text-pencil-light
+      prose-ol:text-pencil-light">
       <ReactMarkdown
         components={{
           img: ({ src, alt }) => (
-            <span className="block overflow-hidden rounded-2xl border border-slate-700/70 my-6">
+            <span className="block overflow-hidden border-2 border-pencil my-6" style={{ borderRadius: '225px 20px 200px 20px / 20px 200px 20px 225px' }}>
               <Image
                 src={src ?? ''}
                 alt={alt ?? ''}

@@ -3,69 +3,186 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
+import { WobblyBorder, DashedDivider } from '@/components/ui/Decorations'
+import { BORDER_RADIUS } from '@/lib/design-tokens'
 
 export function TerminalHero() {
   return (
-    <section className="relative overflow-hidden rounded-3xl border border-terminalBorder bg-terminalSurface/90 p-6 shadow-terminal sm:p-10">
-      <div className="mb-8">
-        <p className="text-sm uppercase tracking-[0.4em] text-cyan-300/80">terminal portfolio</p>
-        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-100 sm:text-5xl">
-          knowMe — your technical knowledge base.
-        </h1>
-      </div>
+    <section className="px-4 sm:px-6 py-12 sm:py-16">
+      <div className="mx-auto max-w-5xl">
+        {/* Hero Container */}
+        <div className="grid gap-8 lg:grid-cols-2 items-center">
+          {/* Left: Headline & CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="space-y-6"
+          >
+            {/* Label */}
+            <div className="inline-block">
+              <p 
+                className="text-sm uppercase tracking-widest font-patrick"
+                style={{
+                  color: '#2d5da1',
+                  fontWeight: 700,
+                  letterSpacing: '0.15em'
+                }}
+              >
+                ✏️ hand-drawn portfolio
+              </p>
+            </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="rounded-3xl border border-terminalBorder bg-[#04121f] p-6 shadow-[0_0_0_1px_rgba(56,189,248,0.12)]"
-        >
-          <div className="mb-5 inline-flex items-center gap-2 text-sm text-slate-400">
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
-            <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
-            <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
-            <span className="ml-auto text-xs uppercase tracking-[0.25em] text-slate-500">bash</span>
-          </div>
-          <pre className="whitespace-pre-wrap break-words text-sm leading-6 text-slate-200">
-            <code className="block text-slate-200">
-              <span className="text-cyan-300">$</span> echo "Welcome to knowMe"
-            </code>
-            <code className="block text-slate-400">Building portfolios with a terminal-first design language.</code>
-            <code className="block text-slate-200 mt-4">$</code>
-            <code className="block text-slate-400">explore the knowledge base, about me, and get in touch.</code>
-          </pre>
-        </motion.div>
+            {/* Main Headline */}
+            <div className="space-y-2">
+              <h1 
+                className="text-5xl sm:text-6xl leading-tight font-bold"
+                style={{
+                  fontFamily: '"Kalam", cursive',
+                  color: '#2d2d2d',
+                  lineHeight: 1.2,
+                }}
+              >
+                Know{' '}
+                <span 
+                  style={{
+                    color: '#ff4d4d',
+                    display: 'inline-block',
+                    transform: 'rotate(-3deg)',
+                  }}
+                >
+                  Me.
+                </span>
+              </h1>
+              <p 
+                className="text-lg sm:text-xl leading-relaxed"
+                style={{
+                  color: '#5a5a5a',
+                  fontFamily: '"Patrick Hand", cursive',
+                  maxWidth: '90%'
+                }}
+              >
+                Your technical knowledge base, experience story, and direct line to a Senior Cloud DevOps & AI Solutions Engineer.
+              </p>
+            </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.75, delay: 0.1, ease: 'easeOut' }}
-          className="rounded-3xl border border-terminalBorder bg-slate-950/40 p-6 shadow-terminal"
-        >
-          <p className="text-sm uppercase tracking-[0.35em] text-cyan-300/80">quick commands</p>
-          <div className="mt-6 space-y-4 text-sm text-slate-300">
-            <Link href="/knowledge-base" className="block rounded-2xl border border-slate-700 bg-slate-900/75 px-4 py-3 hover:border-cyan-400/50 transition">
-              <span className="font-mono text-cyan-300">cd /knowledge-base</span>
-              <p className="mt-2 text-slate-400">Explore curated topics and technical patterns.</p>
-            </Link>
-            <Link href="/about" className="block rounded-2xl border border-slate-700 bg-slate-900/75 px-4 py-3 hover:border-cyan-400/50 transition">
-              <span className="font-mono text-cyan-300">cat about.md</span>
-              <p className="mt-2 text-slate-400">See my story, skills, and background.</p>
-            </Link>
-          </div>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="/contact" className="rounded-full">
-              Contact me
-            </Button>
-            <Link
-              href="/knowledge-base"
-              className="inline-flex items-center rounded-full border border-slate-700 bg-slate-900/80 px-5 py-3 text-sm font-medium text-slate-100 transition hover:border-cyan-400 hover:text-cyan-200"
-            >
-              Explore knowledge
-            </Link>
-          </div>
-        </motion.div>
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-4 pt-4">
+              <Button href="/knowledge-base" variant="primary">
+                Explore knowledge
+              </Button>
+              <Button href="/contact" variant="secondary">
+                Get in touch
+              </Button>
+            </div>
+
+            {/* Quick Stats */}
+            <div className="pt-8 space-y-4">
+              <DashedDivider className="my-4" />
+              <div className="grid grid-cols-2 gap-6 text-sm">
+                <div>
+                  <p className="font-bold text-lg" style={{ color: '#ff4d4d' }}>10+</p>
+                  <p style={{ color: '#5a5a5a' }}>Years Experience</p>
+                </div>
+                <div>
+                  <p className="font-bold text-lg" style={{ color: '#2d5da1' }}>50+</p>
+                  <p style={{ color: '#5a5a5a' }}>Projects Built</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right: Feature Cards */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
+            className="space-y-4 lg:space-y-6"
+          >
+            {/* Quick Links Card */}
+            <WobblyBorder size="lg" decoration="tape">
+              <div 
+                className="p-6 sm:p-8 space-y-4"
+                style={{
+                  borderRadius: BORDER_RADIUS.wobblyMd,
+                }}
+              >
+                <h3 
+                  className="text-xl font-bold"
+                  style={{
+                    fontFamily: '"Kalam", cursive',
+                    color: '#2d2d2d',
+                  }}
+                >
+                  Quick Access
+                </h3>
+                
+                <div className="space-y-3">
+                  {/* Knowledge Base Link */}
+                  <Link 
+                    href="/knowledge-base"
+                    className="block p-4 rounded-xl transition hover:-rotate-1"
+                    style={{
+                      background: '#fff9c4',
+                      border: '2px solid #2d2d2d',
+                      borderRadius: BORDER_RADIUS.wobblySmall,
+                      color: '#2d2d2d',
+                    }}
+                  >
+                    <p className="font-bold text-sm">📚 Knowledge Base</p>
+                    <p className="text-xs mt-1" style={{ color: '#5a5a5a' }}>
+                      Curated posts on cloud, AI, and DevOps patterns
+                    </p>
+                  </Link>
+
+                  {/* About Link */}
+                  <Link 
+                    href="/about"
+                    className="block p-4 rounded-xl transition hover:rotate-1"
+                    style={{
+                      background: '#ffffff',
+                      border: '2px dashed #2d2d2d',
+                      borderRadius: BORDER_RADIUS.wobblySmall,
+                      color: '#2d2d2d',
+                    }}
+                  >
+                    <p className="font-bold text-sm">👤 About Me</p>
+                    <p className="text-xs mt-1" style={{ color: '#5a5a5a' }}>
+                      Story, skills, and technical background
+                    </p>
+                  </Link>
+                </div>
+              </div>
+            </WobblyBorder>
+
+            {/* Featured Stat Card */}
+            <WobblyBorder size="lg" decoration="tack">
+              <div 
+                className="p-6 sm:p-8 text-center"
+                style={{
+                  background: '#fff9c4',
+                  borderRadius: BORDER_RADIUS.wobblyMd,
+                }}
+              >
+                <p className="text-xs uppercase tracking-widest" style={{ color: '#5a5a5a' }}>
+                  Currently Building
+                </p>
+                <h2 
+                  className="text-2xl font-bold mt-2"
+                  style={{
+                    fontFamily: '"Kalam", cursive',
+                    color: '#2d2d2d',
+                  }}
+                >
+                  Multi-Agent AI Systems
+                </h2>
+                <p className="text-sm mt-3" style={{ color: '#5a5a5a' }}>
+                  Exploring MCP architectures and A2A cloud automation
+                </p>
+              </div>
+            </WobblyBorder>
+          </motion.div>
+        </div>
       </div>
     </section>
   )

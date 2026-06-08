@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import { BORDER_RADIUS } from '@/lib/design-tokens'
 
 export function Navbar() {
   const pathname = usePathname()
@@ -31,18 +32,31 @@ export function Navbar() {
   }
 
   return (
-    <nav className="border-b border-slate-700 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-50">
-      <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 md:py-4 lg:px-12">
+    <nav 
+      className="sticky top-0 z-50 border-b-2 border-pencil bg-paper-50/95"
+      style={{
+        borderRadius: '0 0 20px 20px',
+      }}
+    >
+      <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 md:py-4 lg:px-8">
         <div className="flex items-center justify-between">
+          {/* Logo */}
           <Link 
             href="/" 
-            className="text-base sm:text-lg font-bold text-cyan-400 hover:text-cyan-300 transition"
+            className="text-xl sm:text-2xl font-bold transition hover:-rotate-1"
+            style={{
+              fontFamily: '"Kalam", cursive',
+              color: '#2d2d2d',
+              textDecoration: 'underline wavy #ff4d4d',
+              textUnderlineOffset: '4px',
+              textDecorationThickness: '2px',
+            }}
           >
-            &gt; knowMe
+            knowMe
           </Link>
 
           {/* Desktop Navigation */}
-          <ul className="hidden sm:flex gap-4 md:gap-8">
+          <ul className="hidden sm:flex gap-6 md:gap-10">
             {links.map(link => {
               const isActive = pathname === link.href
               return (
@@ -54,11 +68,13 @@ export function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className={`text-sm md:text-base transition ${
-                      isActive
-                        ? 'text-cyan-400 font-semibold border-b-2 border-cyan-400 pb-1'
-                        : 'text-slate-300 hover:text-cyan-300'
-                    }`}
+                    className="text-sm md:text-base font-patrick transition hover:-rotate-1"
+                    style={{
+                      color: isActive ? '#ff4d4d' : '#2d2d2d',
+                      fontWeight: isActive ? 700 : 400,
+                      borderBottom: isActive ? '3px dashed #ff4d4d' : 'none',
+                      paddingBottom: isActive ? '4px' : '0',
+                    }}
                   >
                     {link.label}
                   </Link>
@@ -70,7 +86,14 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="sm:hidden p-2 rounded-lg border border-slate-700 text-cyan-400 hover:bg-slate-900/50 transition"
+            className="sm:hidden p-2 transition hover:rotate-1"
+            style={{
+              border: `2px solid #2d2d2d`,
+              borderRadius: BORDER_RADIUS.wobblySmall,
+              background: '#ffffff',
+              color: '#2d2d2d',
+              cursor: 'pointer',
+            }}
             aria-label="Toggle menu"
           >
             {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -92,7 +115,7 @@ export function Navbar() {
             variants={navVariants}
             initial="hidden"
             animate={isOpen ? 'visible' : 'hidden'}
-            className="flex flex-col gap-3 mt-4 pb-2"
+            className="flex flex-col gap-3 mt-4 pb-4"
           >
             {links.map(link => {
               const isActive = pathname === link.href
@@ -104,11 +127,14 @@ export function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className={`block px-3 py-2 rounded-lg text-sm transition ${
-                      isActive
-                        ? 'text-cyan-400 font-semibold bg-slate-900/50 border-l-2 border-cyan-400'
-                        : 'text-slate-300 hover:text-cyan-300 hover:bg-slate-900/30'
-                    }`}
+                    className="block px-4 py-3 rounded-xl text-sm font-patrick transition hover:rotate-1"
+                    style={{
+                      background: isActive ? '#fff9c4' : '#ffffff',
+                      border: `2px ${isActive ? 'solid' : 'dashed'} #2d2d2d`,
+                      color: '#2d2d2d',
+                      fontWeight: isActive ? 700 : 400,
+                      borderRadius: BORDER_RADIUS.wobblySmall,
+                    }}
                   >
                     {link.label}
                   </Link>

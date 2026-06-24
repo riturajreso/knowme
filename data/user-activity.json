@@ -60,5 +60,55 @@
     "path": "/contact",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
     "ipAddress": "::1"
+  },
+  {
+    "id": "b94f3791-ee2f-4d84-8994-0267b1fbd244",
+    "createdAt": "2026-06-24T08:26:26.082Z",
+    "type": "page_view",
+    "path": "/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:152.0) Gecko/20100101 Firefox/152.0",
+    "ipAddress": "136.226.253.75"
+  },
+  {
+    "id": "7a48b500-5e6c-4926-846b-721d7d8aa287",
+    "createdAt": "2026-06-24T08:27:35.588Z",
+    "type": "page_view",
+    "path": "/about",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:152.0) Gecko/20100101 Firefox/152.0",
+    "ipAddress": "136.226.253.75"
+  },
+  {
+    "id": "f402ec83-bd6e-4888-9927-c27c92c1d14a",
+    "createdAt": "2026-06-24T08:37:23.208Z",
+    "type": "post_view",
+    "path": "/knowledge-base/genai-agents-agentic",
+    "postSlug": "genai-agents-agentic",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:152.0) Gecko/20100101 Firefox/152.0",
+    "ipAddress": "136.226.253.75"
+  },
+  {
+    "id": "4fdc4d56-3dc0-41d9-9c70-de9b64dc18c6",
+    "createdAt": "2026-06-24T08:37:40.530Z",
+    "type": "post_view",
+    "path": "/knowledge-base/container-escape-risks-detection-prevention",
+    "postSlug": "container-escape-risks-detection-prevention",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:152.0) Gecko/20100101 Firefox/152.0",
+    "ipAddress": "136.226.253.75"
+  },
+  {
+    "id": "891f922d-335b-4399-842a-87f49c136f75",
+    "createdAt": "2026-06-24T08:37:48.099Z",
+    "type": "page_view",
+    "path": "/knowledge-base",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:152.0) Gecko/20100101 Firefox/152.0",
+    "ipAddress": "136.226.253.75"
+  },
+  {
+    "id": "b34eb7b9-0dcf-431c-9eba-7fa0d07306ee",
+    "createdAt": "2026-06-24T08:40:41.071Z",
+    "type": "page_view",
+    "path": "/contact",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:152.0) Gecko/20100101 Firefox/152.0",
+    "ipAddress": "136.226.253.75"
   }
 ]

@@ -76,7 +76,7 @@ export default async function PostPage({ params }: PostPageProps) {
                 alt={post.title}
                 width={1200}
                 height={630}
-                className="h-56 w-full object-cover sm:h-72"
+                className="block w-full object-contain max-h-56 sm:max-h-72"
                 priority
               />
             </div>

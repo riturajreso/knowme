@@ -21,7 +21,6 @@ export default function KnowledgeBasePage() {
             <WobblyBorder
               key={item.slug}
               size="lg"
-              decoration={i % 3 === 0 ? 'tack' : i % 3 === 1 ? 'tape' : 'none'}
               className="group relative transition hover:-rotate-1 hover:shadow-hard-lg"
             >
               <article className="h-full">

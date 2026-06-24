@@ -37,6 +37,7 @@ export function WobblyBorder({
       style={{
         borderRadius: radiusMap[size],
         border: `2px ${borderStyle} #2d2d2d`,
+        overflow: 'hidden',
         ...style,
       }}
     >

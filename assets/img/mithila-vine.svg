@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="420" viewBox="0 0 150 420" fill="none" stroke="#242822" stroke-width="1.5" stroke-linejoin="round">
+	<defs>
+		<pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse">
+			<path d="m-1 1 2-2M0 6l6-6m-1 7 2-2" stroke="#fdfdf9" stroke-width=".7"/>
+		</pattern>
+		<g id="chip">
+			<path d="M-12-22v-7M0-22v-7M12-22v-7M-12 22v7M0 22v7M12 22v7M-22-12h-7M-22 0h-7M-22 12h-7M22-12h7M22 0h7M22 12h7"/>
+			<rect x="-22" y="-22" width="44" height="44" rx="2" fill="#265e56"/>
+			<rect x="-18" y="-18" width="36" height="36" fill="url(#hatch)"/>
+			<rect x="-12" y="-12" width="24" height="24" fill="#fdfdf9"/>
+			<path d="m0-7 7 7-7 7-7-7Z" fill="#ac761c"/>
+		</g>
+		<g id="junction">
+			<circle r="5" fill="#fdfdf9"/>
+			<circle r="2" fill="#973d40" stroke="none"/>
+		</g>
+	</defs>
+	<path d="M72 77v315m6-315v315M72 110H37v20m41 33h35v37M72 246H37v-58m41 113h35v-43M72 354H36v-30m42 47h35v-39"/>
+	<path d="M78 116H43v14m29 53h35v31M78 252H31v-64m41 119h47v-49M78 360H30v-36m42 53h47v-45" stroke="#ac761c"/>
+	<path d="M45 77C22 77 19 47 40 41C39 14 77 9 87 32C108 20 128 37 122 55C139 67 127 81 113 81H45Z" fill="#973d40"/>
+	<path d="M46 71C29 71 27 51 46 46C44 23 73 16 84 41C104 26 119 41 115 57C132 67 119 75 111 75H46Z" stroke="#fdfdf9"/>
+	<path d="M61 55h29M65 61h21M69 67h13" stroke="#e1b759"/>
+	<use href="#chip" transform="translate(37 159)"/>
+	<use href="#chip" transform="translate(113 229)"/>
+	<g fill="#fdfdf9">
+		<rect x="13" y="279" width="48" height="18" rx="2"/>
+		<rect x="13" y="302" width="48" height="18" rx="2"/>
+		<rect x="89" y="291" width="48" height="18" rx="2"/>
+		<rect x="89" y="314" width="48" height="18" rx="2"/>
+	</g>
+	<path d="M18 283h38v10H18Zm0 23h38v10H18Zm76-11h38v10H94Zm0 23h38v10H94Z" stroke="#265e56"/>
+	<path d="M35 288h16m-16 23h16m59-11h17m-17 23h17"/>
+	<g fill="#ac761c" stroke="none"><circle cx="24" cy="288" r="2"/><circle cx="24" cy="311" r="2"/><circle cx="100" cy="300" r="2"/><circle cx="100" cy="323" r="2"/></g>
+	<use href="#junction" x="75" y="110"/><use href="#junction" x="75" y="179"/>
+	<use href="#junction" x="75" y="249"/><use href="#junction" x="75" y="304"/>
+	<path d="m75 384 14 14-14 14-14-14Z" fill="#973d40"/>
+	<path d="m75 390 8 8-8 8-8-8Z" stroke="#fdfdf9"/>
+</svg>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html data-theme="static" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IP Addresses, Subnets, and CIDR Blocks — Explained Without the Math | knowMe</title>
+  <meta name="description" content="A jargon-free, metaphor-driven guide to how IP addresses, subnets, and CIDR blocks really work — no bits, no binary, just streets and houses.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  
+  <script src="../assets/js/theme.js?v=themes-3"></script><link rel="stylesheet" href="../assets/css/style.css?v=themes-3"><link rel="stylesheet" href="../assets/css/themes.css?v=themes-3">
+</head>
+<body><div class="reading-progress" aria-hidden="true"></div><a class="skip-link" href="#main-content">Skip to content</a>
+
+  <nav aria-label="Main navigation" class="site-nav"><div class="site-nav__inner"><a href="../index.html" class="brand" aria-label="knowMe home">knowMe<span class="brand-dot">.</span></a><ul class="nav-links"><li><a href="../index.html">Home</a></li><li><a href="../about.html">Experience</a></li><li><a href="../knowledge-base.html">Notebook</a></li><li><a href="../contact.html">Contact</a></li></ul><div class="theme-picker"><button type="button" class="theme-toggle" data-theme-toggle="" role="switch" aria-checked="false" aria-label="Change theme" title="Change theme"><span class="theme-toggle__track" aria-hidden="true"></span></button></div><button class="nav-toggle" type="button" aria-controls="mobile-navigation" aria-label="Open navigation" aria-expanded="false"><img src="../assets/icons/menu.svg" width="20" height="20" alt=""></button></div><div class="nav-mobile" id="mobile-navigation"><a href="../index.html">Home</a><a href="../about.html">Experience</a><a href="../knowledge-base.html">Notebook</a><a href="../contact.html">Contact</a></div></nav>
+
+  <main id="main-content" class="wrap section article-shell">
+    <article class="card card--xl card--pad-lg">
+      <a href="../knowledge-base.html" class="back-link">← Back to the notebook</a>
+
+      <div class="post-meta-row">
+        <span class="post-card__tag">Networking</span>
+        <span> August 23, 2025</span>
+        <span> 9 min</span>
+      </div>
+
+      <h1 class="heading-xl">IP Addresses, Subnets, and CIDR Blocks — Explained Without the Math</h1>
+
+      <div class="post-hero-img">
+        <img loading="lazy" src="../assets/img/posts/ip-subnet-cidr.png" alt="IP Addresses, Subnets, and CIDR Blocks — Explained Without the Math">
+      </div>
+
+      <p class="lede" style="max-width:none; font-size:1.05rem;">A jargon-free, metaphor-driven guide to how IP addresses, subnets, and CIDR blocks really work — no bits, no binary, just streets and houses.</p>
+
+      <div class="prose" style="margin-top:2rem;">
+
+<p>Most networking guides drop you straight into bits and binary. You do not need any of that to actually understand how the internet is organized. One simple picture is enough: <strong>a city full of neighborhoods and houses</strong>. Hold that picture in your head, and everything else falls into place.</p>
+<h2>The Core Metaphor</h2>
+<p>Imagine a large city.</p>
+<ul>
+<li>The <strong>city</strong> is the entire network (the internet, or your company's cloud network).</li>
+<li>A <strong>neighborhood</strong> is a subnet — a defined area with its own boundaries.</li>
+<li>A <strong>house</strong> is a device — a laptop, a server, a phone, a database.</li>
+<li>The <strong>house address</strong> is the IP address — every house needs one to receive mail.</li>
+<li>A <strong>CIDR block</strong> is just the city's official way of writing down <em>"this neighborhood owns these house numbers."</em></li>
+</ul>
+<p>That is it. The whole topic is just the post office's filing system.</p>
+<h2>1. IP Address — The House Address</h2>
+<h3>What it is</h3>
+<p>An IP address is a unique number that identifies a device on a network. It is how data finds its way to the right machine, exactly like a postal address finds the right house.</p>
+<p>You have seen one. It looks like this:</p>
+<pre><code>192.168.1.10
+</code></pre>
+<p>Four numbers separated by dots. That is the address of one specific "house."</p>
+<h3>Public vs private addresses</h3>
+<p>Some addresses are reachable from the open internet, and some are only valid inside a private network:</p>
+<ul>
+<li><strong>Public IP</strong> — like a house on a real street, visible to anyone delivering mail from anywhere.</li>
+<li><strong>Private IP</strong> — like a desk number inside an office building. Useful inside the building, but the postman on the street does not know about it.</li>
+</ul>
+<p>This is why your laptop at home might be <code>192.168.1.42</code> and your neighbor's laptop might <em>also</em> be <code>192.168.1.42</code>. Same desk number, different buildings. No conflict.</p>
+<h3>Real-world example</h3>
+<p>When you open a website:</p>
+<ol>
+<li>Your laptop has a private address inside your home network.</li>
+<li>Your router has a public address from your internet provider.</li>
+<li>The website has its own public address somewhere on the internet.</li>
+<li>Data hops between these addresses until it reaches the right house.</li>
+</ol>
+<p>The IP address is the <em>destination on the envelope.</em> Everything else in networking is about getting the envelope there.</p>
+<h2>2. Subnetting — Dividing the City Into Neighborhoods</h2>
+<h3>What it is</h3>
+<p>Subnetting is the practice of splitting a big address space into smaller, organized chunks called <strong>subnets</strong>.</p>
+<p>In the metaphor: instead of one giant city where every house is on one endless street, you carve the city into neighborhoods. Each neighborhood has its own boundaries, its own rules, and its own purpose.</p>
+<h3>Why we bother</h3>
+<p>A city with no neighborhoods would be chaos:</p>
+<ul>
+<li>The mail carrier would have to search the entire city for every letter.</li>
+<li>There would be no way to put a fence around the bank district.</li>
+<li>A noisy block party would disturb the whole city at once.</li>
+<li>You could not say "the school zone has stricter speed limits."</li>
+</ul>
+<p>Subnets fix all of that for networks. They give you:</p>
+<ul>
+<li><strong>organization</strong> — group similar devices together,</li>
+<li><strong>security</strong> — put walls and gates between groups,</li>
+<li><strong>efficiency</strong> — the "postman" (the router) knows exactly where to deliver,</li>
+<li><strong>separation</strong> — keep production away from development, finance away from guests.</li>
+</ul>
+<h3>Real-world example: an office building</h3>
+<p>Picture a 4-story office:</p>
+<ul>
+<li>Floor 1: Reception</li>
+<li>Floor 2: Engineering</li>
+<li>Floor 3: Finance</li>
+<li>Floor 4: Executives</li>
+</ul>
+<p>Each floor is a subnet. Finance gets a stricter badge policy. Engineering's experiments cannot leak into Finance. Visitors are routed to the right floor cleanly.</p>
+<p>That is exactly why we subnet networks — same reasoning, applied to data instead of people.</p>
+<h2>3. CIDR Block — The Street Sign for a Neighborhood</h2>
+<p>This is the part most explanations make complicated. We will not.</p>
+<h3>What a CIDR block really is</h3>
+<p>A CIDR block is just a <strong>shorthand way of writing down which house numbers belong to a neighborhood</strong>.</p>
+<p>It looks like this:</p>
+<pre><code>10.0.1.0/24
+</code></pre>
+<p>You can read that out loud as:</p>
+<blockquote>
+<p>"This neighborhood owns 256 addresses, starting from <code>10.0.1.0</code>."</p>
+</blockquote>
+<p>That is it. The slash and the number are just the city's official way of saying <em>"the neighborhood is this big."</em></p>
+<h3>The intuition behind the slash number</h3>
+<p>Here is the only rule you need to remember:</p>
+<blockquote>
+<p><strong>A smaller number after the slash means a bigger neighborhood.</strong>
+<strong>A bigger number after the slash means a smaller neighborhood.</strong></p>
+</blockquote>
+<p>It feels backwards at first, but think of it this way: the slash number tells you how <em>specific</em> the address is.</p>
+<ul>
+<li><code>/8</code> is very general — like saying "anywhere in California." Millions of houses.</li>
+<li><code>/16</code> is more specific — like "anywhere in Los Angeles." Tens of thousands of houses.</li>
+<li><code>/24</code> is even more specific — like "anywhere on Maple Street." A few hundred houses.</li>
+<li><code>/32</code> is one exact house — "1428 Maple Street." Just one.</li>
+</ul>
+<p>The more digits the address pins down, the smaller the neighborhood.</p>
+<h3>A simple reference table</h3>
+<p>You do not need to do any math. Just memorize the rough sizes:</p>
+<table>
+<thead>
+<tr>
+<th>CIDR</th>
+<th>How big the neighborhood is</th>
+<th>Real-world feel</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/32</code></td>
+<td>1 address</td>
+<td>A single house</td>
+</tr>
+<tr>
+<td><code>/28</code></td>
+<td>16 addresses</td>
+<td>A small cul-de-sac</td>
+</tr>
+<tr>
+<td><code>/24</code></td>
+<td>256 addresses</td>
+<td>A normal street</td>
+</tr>
+<tr>
+<td><code>/20</code></td>
+<td>~4,000 addresses</td>
+<td>A small town</td>
+</tr>
+<tr>
+<td><code>/16</code></td>
+<td>~65,000 addresses</td>
+<td>A big district</td>
+</tr>
+<tr>
+<td><code>/8</code></td>
+<td>~16 million addresses</td>
+<td>A whole region</td>
+</tr>
+</tbody></table>
+<p>When a cloud engineer says "give me a <code>/24</code>," they are saying "give me a normal-street-sized neighborhood, about 256 addresses." That is all.</p>
+<h3>Real-world example: numbering houses</h3>
+<p>Imagine a neighborhood where the street sign says:</p>
+<blockquote>
+<p><strong>"Maple Street — houses 100 through 199."</strong></p>
+</blockquote>
+<p>That sign is doing exactly what a CIDR block does. It tells the postman:</p>
+<ul>
+<li>the neighborhood name (Maple Street),</li>
+<li>the range of valid house numbers (100–199),</li>
+<li>and therefore which mail belongs here and which does not.</li>
+</ul>
+<p><code>10.0.1.0/24</code> is the same idea: <em>"This neighborhood owns addresses 10.0.1.0 through 10.0.1.255."</em> That is all you need to know to use CIDR confidently.</p>
+<h2>Putting It All Together: A Cloud Example</h2>
+<p>This is exactly how cloud networks (like AWS VPC, Azure VNet, or GCP VPC) are designed in the real world.</p>
+<h3>Step 1: Pick the city</h3>
+<p>Choose the overall address range for your cloud network:</p>
+<pre><code>City (VPC): 10.0.0.0/16   →  about 65,000 addresses
+</code></pre>
+<p>That is your whole city. Plenty of room.</p>
+<h3>Step 2: Carve out neighborhoods (subnets)</h3>
+<p>Split the city into purposeful neighborhoods:</p>
+<pre><code>Public neighborhood A:   10.0.1.0/24   (256 addresses, near the city gate)
+Public neighborhood B:   10.0.2.0/24
+Private neighborhood A:  10.0.11.0/24  (no direct street to the outside)
+Private neighborhood B:  10.0.12.0/24
+Database neighborhood A: 10.0.21.0/24  (locked, no outside access at all)
+Database neighborhood B: 10.0.22.0/24
+</code></pre>
+<h3>Step 3: Place the houses</h3>
+<ul>
+<li>A <strong>load balancer</strong> lives in the public neighborhood — it greets visitors.</li>
+<li><strong>Application servers</strong> live in the private neighborhood — they do the work, but visitors cannot walk in directly.</li>
+<li><strong>Databases</strong> live in the database neighborhood — locked, gated, no outside access.</li>
+</ul>
+<p>Each device gets one address from its neighborhood. Just like a house gets one number on its street.</p>
+<h3>Step 4: Set the gates and the roads</h3>
+<ul>
+<li><strong>Routes</strong> are like street maps — they tell traffic which way to go.</li>
+<li><strong>Firewalls / security groups</strong> are the locks on each house and the gates around each neighborhood.</li>
+</ul>
+<p>That is basically the entire design pattern of a production cloud network. Just addresses, neighborhoods, and signs.</p>
+<h2>A Few Friendly Tips</h2>
+<ul>
+<li><strong>Plan the city big, the neighborhoods comfortable.</strong> A <code>/16</code> city gives you room to grow. <code>/24</code> neighborhoods are a great default — not too big, not too small.</li>
+<li><strong>Leave gaps between neighborhoods.</strong> Do not number them back-to-back. You will thank yourself when you need to add a new one.</li>
+<li><strong>Never let two cities share the same street names.</strong> If you ever connect two networks together and they overlap, the postman gets confused and mail gets lost. Pick non-overlapping ranges from day one.</li>
+<li><strong>Remember that a few addresses in every neighborhood are reserved</strong> for the city's own use (street signs, fire hydrants, that sort of thing). The neighborhood is slightly smaller than it looks.</li>
+<li><strong>Write the map down.</strong> A simple table of "which neighborhood is for what" saves hours of debugging later.</li>
+</ul>
+<h2>How the Pieces Fit Together</h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Real-world picture</th>
+<th>What it actually does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IP address</td>
+<td>A house number</td>
+<td>Identifies one specific device</td>
+</tr>
+<tr>
+<td>Subnet</td>
+<td>A neighborhood</td>
+<td>Groups related devices together</td>
+</tr>
+<tr>
+<td>CIDR block</td>
+<td>A street sign saying "houses 100–199"</td>
+<td>Declares which addresses belong to a neighborhood</td>
+</tr>
+<tr>
+<td>VPC / network</td>
+<td>The whole city</td>
+<td>The total address space you own</td>
+</tr>
+</tbody></table>
+<h2>Common Misunderstandings</h2>
+<ul>
+<li><strong>"A bigger slash number means a bigger network."</strong> Opposite. <code>/16</code> is much bigger than <code>/24</code>. Smaller slash = bigger neighborhood.</li>
+<li><strong>"Private addresses are automatically safe."</strong> Private just means "not visible from the public street." Inside the building, you still need locks on the doors.</li>
+<li><strong>"I can use any addresses I want."</strong> Technically yes, but if you ever connect to another network and you have used the same ranges, you will have a painful renumbering project ahead.</li>
+<li><strong>"Subnetting is only for huge companies."</strong> Even a home network benefits from separating smart-home gadgets, guest Wi-Fi, and trusted laptops into different neighborhoods.</li>
+</ul>
+<h2>Key Takeaways</h2>
+<ul>
+<li><strong>An IP address is a house number</strong> — it points to one specific device.</li>
+<li><strong>A subnet is a neighborhood</strong> — a meaningful slice of the city, used to organize and protect what is inside.</li>
+<li><strong>A CIDR block is the street sign</strong> — a short, standard way of writing down exactly which addresses belong to that neighborhood.</li>
+</ul>
+<h2>Final Thought</h2>
+<p>Networking only feels intimidating because the words sound technical. The underlying idea is just <strong>a well-organized city with clearly labeled streets</strong>. Once you can picture houses, neighborhoods, and street signs, you can read any cloud network diagram and understand what it is really saying — without ever touching a single bit of binary.</p>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap"><p> 2026 Ritu Raj · Cloud, DevOps &amp; AI</p><p><a href="mailto:riturajreso@gmail.com">Email</a> · <a href="https://www.linkedin.com/in/riturajreso/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · Bangalore, India</p></div>
+  </footer>
+
+  <script src="../assets/js/main.js?v=themes-3"></script>
+</body>
+</html>

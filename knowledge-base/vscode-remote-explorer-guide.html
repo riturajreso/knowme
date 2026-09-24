@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html data-theme="static" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VS Code Remote Explorer: One Window, Many Environments | knowMe</title>
+  <meta name="description" content="How to use Remote Explorer to work with DevContainers, SSH VMs, and GitHub Codespaces from a single VS Code window — and why it changes your daily workflow.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  
+  <script src="../assets/js/theme.js?v=themes-3"></script><link rel="stylesheet" href="../assets/css/style.css?v=themes-3"><link rel="stylesheet" href="../assets/css/themes.css?v=themes-3">
+</head>
+<body><div class="reading-progress" aria-hidden="true"></div><a class="skip-link" href="#main-content">Skip to content</a>
+
+  <nav aria-label="Main navigation" class="site-nav"><div class="site-nav__inner"><a href="../index.html" class="brand" aria-label="knowMe home">knowMe<span class="brand-dot">.</span></a><ul class="nav-links"><li><a href="../index.html">Home</a></li><li><a href="../about.html">Experience</a></li><li><a href="../knowledge-base.html">Notebook</a></li><li><a href="../contact.html">Contact</a></li></ul><div class="theme-picker"><button type="button" class="theme-toggle" data-theme-toggle="" role="switch" aria-checked="false" aria-label="Change theme" title="Change theme"><span class="theme-toggle__track" aria-hidden="true"></span></button></div><button class="nav-toggle" type="button" aria-controls="mobile-navigation" aria-label="Open navigation" aria-expanded="false"><img src="../assets/icons/menu.svg" width="20" height="20" alt=""></button></div><div class="nav-mobile" id="mobile-navigation"><a href="../index.html">Home</a><a href="../about.html">Experience</a><a href="../knowledge-base.html">Notebook</a><a href="../contact.html">Contact</a></div></nav>
+
+  <main id="main-content" class="wrap section article-shell">
+    <article class="card card--xl card--pad-lg">
+      <a href="../knowledge-base.html" class="back-link">← Back to the notebook</a>
+
+      <div class="post-meta-row">
+        <span class="post-card__tag">DevOps</span>
+        <span> February 13, 2025</span>
+        <span> 8 min</span>
+      </div>
+
+      <h1 class="heading-xl">VS Code Remote Explorer: One Window, Many Environments</h1>
+
+      <div class="post-hero-img">
+        <img loading="lazy" src="../assets/img/posts/remote-explorer.png" alt="VS Code Remote Explorer: One Window, Many Environments">
+      </div>
+
+      <p class="lede" style="max-width:none; font-size:1.05rem;">How to use Remote Explorer to work with DevContainers, SSH VMs, and GitHub Codespaces from a single VS Code window — and why it changes your daily workflow.</p>
+
+      <div class="prose" style="margin-top:2rem;">
+
+<h2>The Simple Definition</h2>
+<p><strong>Remote Explorer</strong> is the VS Code panel that lets you connect to, manage, and switch between remote development environments — containers, virtual machines over SSH, GitHub Codespaces, WSL distros, and secure tunnels — all from the same editor window.</p>
+<p>You stay in one VS Code. The environment your code actually runs in can be anywhere.</p>
+<h2>The Real-World Analogy</h2>
+<p>Think of an air traffic control tower.</p>
+<ul>
+<li>The controller never leaves the tower.</li>
+<li>But from that one seat, they can talk to dozens of aircraft, on different runways, going to different destinations.</li>
+<li>Each plane has its own crew, fuel, and flight plan — yet they all coordinate through the same console.</li>
+</ul>
+<p>Remote Explorer is that console for engineers.</p>
+<table>
+<thead>
+<tr>
+<th>Control Tower</th>
+<th>Remote Explorer</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The tower seat</td>
+<td>Your local VS Code window</td>
+</tr>
+<tr>
+<td>Each aircraft</td>
+<td>A remote environment (container, VM, Codespace)</td>
+</tr>
+<tr>
+<td>Radio channels</td>
+<td>The Remote Development protocol</td>
+</tr>
+<tr>
+<td>Flight plan</td>
+<td>Workspace + extensions running remotely</td>
+</tr>
+<tr>
+<td>Runway</td>
+<td>The host where the code actually executes</td>
+</tr>
+</tbody></table>
+<p>You change channels. The cockpit (your editor) stays the same.</p>
+<h2>What Remote Explorer Looks Like</h2>
+<p>Open it from the <strong>Activity Bar</strong> on the left — the icon that looks like a small monitor with a connection symbol. At the top of the panel, there is a dropdown that lets you switch between targets:</p>
+<ul>
+<li><strong>Dev Containers</strong> — containers defined by <code>.devcontainer/devcontainer.json</code></li>
+<li><strong>SSH</strong> — remote hosts from your <code>~/.ssh/config</code></li>
+<li><strong>GitHub Codespaces</strong> — cloud-hosted dev environments</li>
+<li><strong>Tunnels</strong> — secure connections to machines without public IPs (via <code>code tunnel</code>)</li>
+<li><strong>WSL</strong> — Linux distros running on Windows</li>
+</ul>
+<p>Each target shows recent connections, running sessions, and quick actions to start, stop, or open a new window.</p>
+<p>The mental model is simple: <strong>pick a target type, pick a destination, open a folder.</strong> The rest behaves like local VS Code.</p>
+<h2>Use Case 1 — Dev Containers</h2>
+<p>Use this when your project ships with a <code>.devcontainer</code> definition and you want everyone on the team to develop in the exact same environment.</p>
+<h3>Common actions from Remote Explorer</h3>
+<ul>
+<li><strong>Reopen in Container</strong> — rebuild the current folder inside its container.</li>
+<li><strong>Attach to Running Container</strong> — connect to a container that is already running (useful for debugging a service started by <code>docker compose</code>).</li>
+<li><strong>Rebuild Container</strong> — pick this up after editing <code>devcontainer.json</code> or the Dockerfile.</li>
+<li><strong>Recent Containers</strong> — jump back into a recent environment without reopening the repo.</li>
+</ul>
+<h3>Typical daily flow</h3>
+<pre><code class="language-bash">git clone &lt;repo&gt;
+code .
+# Remote Explorer → Dev Containers → Reopen in Container
+</code></pre>
+<p>Within a minute or two, you have the right Python, the right Node, the right CLIs, and the right extensions — without touching your host.</p>
+<h2>Use Case 2 — SSH to a VM</h2>
+<p>This is the workhorse for working on cloud VMs, on-prem servers, or any Linux box you can reach via SSH.</p>
+<h3>Step 1 — Configure <code>~/.ssh/config</code></h3>
+<p>Remote Explorer reads your SSH config and lists every host. A clean config makes this experience excellent:</p>
+<pre><code class="language-ssh-config">Host bastion
+  HostName bastion.example.com
+  User ritu
+  IdentityFile ~/.ssh/id_ed25519
+
+Host build-vm
+  HostName 10.20.30.40
+  User ritu
+  IdentityFile ~/.ssh/id_ed25519
+  ProxyJump bastion
+
+Host gpu-node
+  HostName gpu01.internal
+  User ritu
+  IdentityFile ~/.ssh/id_ed25519
+  ForwardAgent yes
+</code></pre>
+<p><code>ProxyJump</code> is the key trick for environments where you have to go through a bastion host — Remote Explorer handles the hop transparently.</p>
+<h3>Step 2 — Connect</h3>
+<p>In Remote Explorer:</p>
+<ol>
+<li>Switch the dropdown to <strong>SSH</strong>.</li>
+<li>Click the host (for example, <code>build-vm</code>).</li>
+<li>Choose <strong>Connect in New Window</strong>.</li>
+</ol>
+<p>VS Code installs a small <strong>VS Code Server</strong> on the remote host the first time you connect. After that, connections are fast.</p>
+<h3>Step 3 — Open a folder and start working</h3>
+<ul>
+<li>Open any folder on the remote machine.</li>
+<li>Run terminals — they run on the VM, not locally.</li>
+<li>Forward ports automatically: if your app listens on <code>:8080</code>, VS Code offers to forward it so you can hit <code>http://localhost:8080</code> on your laptop.</li>
+</ul>
+<h3>What this is great for</h3>
+<ul>
+<li>Developing against a VM that matches production.</li>
+<li>Working on GPU machines or high-memory boxes from a thin laptop.</li>
+<li>Editing infrastructure code directly on the jump host.</li>
+<li>Debugging an issue that only reproduces in a specific environment.</li>
+</ul>
+<h2>Use Case 3 — GitHub Codespaces</h2>
+<p>Codespaces are cloud-hosted dev environments built from the same <code>.devcontainer</code> definition you already use locally. Remote Explorer lets you drive them from your desktop VS Code instead of the browser.</p>
+<h3>Common actions</h3>
+<ul>
+<li><strong>Create New Codespace</strong> — pick a repo, branch, and machine size.</li>
+<li><strong>Connect to Codespace</strong> — open an existing one in your local VS Code window.</li>
+<li><strong>Stop / Start</strong> — codespaces auto-suspend, but you can manage them manually.</li>
+<li><strong>Manage in Browser</strong> — jump to the GitHub UI for billing, machine type, retention.</li>
+</ul>
+<h3>Typical daily flow</h3>
+<ol>
+<li>Open Remote Explorer → <strong>GitHub Codespaces</strong>.</li>
+<li>Pick the repo and branch.</li>
+<li>VS Code spins up the cloud environment, builds the dev container if needed, and connects.</li>
+<li>You code as if it were local — terminal, debugger, extensions, ports, all working.</li>
+</ol>
+<h3>Where Codespaces really shines</h3>
+<ul>
+<li>Onboarding a new engineer in minutes, with zero local setup.</li>
+<li>Working from a low-powered device (including an iPad with VS Code in the browser).</li>
+<li>Spinning up disposable environments to review a PR safely.</li>
+<li>Using <strong>prebuilds</strong> so the environment is ready in seconds instead of minutes.</li>
+</ul>
+<h2>A Quick Word on WSL and Tunnels</h2>
+<p>Two more targets worth knowing about:</p>
+<ul>
+<li><strong>WSL</strong> — develop inside a Linux distro on Windows, with native Linux tooling, while your editor runs on Windows.</li>
+<li><strong>Tunnels</strong> (<code>code tunnel</code>) — expose a machine that has no public IP and no SSH access, then connect to it from any VS Code (desktop or <code>vscode.dev</code>) using your GitHub identity. Useful for home labs, lab machines behind NAT, or short-lived debugging sessions.</li>
+</ul>
+<p>Both show up in the same Remote Explorer dropdown.</p>
+<h2>How It Works Under the Hood</h2>
+<p>The reason all of this feels like one editor is a clean architecture:</p>
+<ul>
+<li><strong>Local side:</strong> the VS Code UI — windows, menus, settings, themes, source control UI, key bindings.</li>
+<li><strong>Remote side:</strong> a lightweight <strong>VS Code Server</strong> running on the container, VM, Codespace, or WSL distro. It hosts:<ul>
+<li>the file system view</li>
+<li>the integrated terminal</li>
+<li>language servers and IntelliSense</li>
+<li>the debugger</li>
+<li>extensions marked as "workspace" extensions</li>
+</ul>
+</li>
+<li><strong>The link:</strong> a thin, multiplexed protocol over SSH, a container exec channel, a Codespaces connection, or a tunnel.</li>
+</ul>
+<p>Extensions are split into two buckets:</p>
+<ul>
+<li><strong>UI extensions</strong> stay local (themes, key bindings, vim emulation).</li>
+<li><strong>Workspace extensions</strong> install into the remote (linters, debuggers, language tools).</li>
+</ul>
+<p>This split is why you can run a heavy toolchain on a 64-core VM while your laptop barely warms up.</p>
+<h2>Why It Helps in Day-to-Day Development</h2>
+<p>A few concrete scenarios where Remote Explorer pays for itself fast:</p>
+<h3>1. Develop on Mac or Windows, build on Linux</h3>
+<p>Open the repo over SSH on a Linux VM. Builds, container tooling, and shell scripts all behave like Linux because they <em>are</em> on Linux.</p>
+<h3>2. Reproduce a production-only bug</h3>
+<p>SSH into a staging VM that mirrors production. Edit, run, and debug with the same paths, env vars, and network conditions as the real system.</p>
+<h3>3. Stop polluting your laptop</h3>
+<p>No more "I need to install yet another SDK." DevContainers and Codespaces keep project-specific tooling inside the project.</p>
+<h3>4. Switch projects in seconds</h3>
+<p>Remote Explorer remembers recent targets. Jumping from one client's environment to another is a two-click operation.</p>
+<h3>5. Work from anywhere</h3>
+<p>With Codespaces or tunnels, your dev environment is reachable from any device. A travel laptop, an iPad, even a borrowed machine — same setup, same extensions.</p>
+<h3>6. Consistent team environments</h3>
+<p>Everyone on the team opens the same container or Codespace definition. "Works on my machine" stops being a recurring conversation.</p>
+<h3>7. Safely test risky changes</h3>
+<p>Spin up a throwaway Codespace or VM, try a risky migration, blow it away. Your main environment is untouched.</p>
+<h2>Practical Tips</h2>
+<p>A few things that make the experience noticeably better:</p>
+<ul>
+<li><strong>Use <code>ProxyJump</code></strong> in <code>~/.ssh/config</code> for bastion hosts. Remote Explorer will pick it up automatically.</li>
+<li><strong>Enable Settings Sync</strong> so your keybindings, snippets, and UI extensions follow you across every remote target.</li>
+<li><strong>Use a dotfiles repo for Codespaces.</strong> Point GitHub at it and every new Codespace bootstraps your shell, aliases, and tools.</li>
+<li><strong>Pin "Always Forward" ports</strong> in the Ports panel for the URLs you hit constantly.</li>
+<li><strong>Be deliberate about UI vs workspace extensions.</strong> Themes belong locally. Linters belong remotely. The "Install in Remote" button in the Extensions view is your friend.</li>
+<li><strong>Use <code>code tunnel</code></strong> on machines you cannot expose over SSH. It is surprisingly handy for home labs and air-gapped-ish environments.</li>
+<li><strong>Name your SSH hosts clearly</strong> — <code>prod-bastion</code>, <code>staging-app-01</code>, <code>gpu-node</code> — they show up exactly like that in Remote Explorer.</li>
+</ul>
+<h3>Useful shortcuts</h3>
+<pre><code class="language-text">F1 → "Remote-SSH: Connect to Host..."
+F1 → "Dev Containers: Reopen in Container"
+F1 → "Codespaces: Create New Codespace"
+F1 → "Remote: Close Remote Connection"
+</code></pre>
+<h2>Key Takeaways</h2>
+<ul>
+<li><strong>Remote Explorer is the single control surface</strong> for DevContainers, SSH VMs, Codespaces, WSL, and tunnels — one window, many environments.</li>
+<li><strong>The architecture is local UI + remote VS Code Server</strong>, which is what makes remote work feel native instead of laggy or limited.</li>
+<li><strong>The daily benefit is consistency and mobility:</strong> the same editor, the same settings, and the right environment for each task — without reinstalling anything on your laptop.</li>
+</ul>
+<h2>Final Thought</h2>
+<p>The shift Remote Explorer enables is subtle but important: your laptop stops being the place where development happens, and becomes the place where development is <em>controlled</em> from. Once you start working this way — containers for project parity, SSH for production-like debugging, Codespaces for anywhere-access — going back to a single local environment feels like working with one hand tied behind your back.</p>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap"><p> 2026 Ritu Raj · Cloud, DevOps &amp; AI</p><p><a href="mailto:riturajreso@gmail.com">Email</a> · <a href="https://www.linkedin.com/in/riturajreso/" target="_blank" rel="noopener noreferrer">LinkedIn</a> · Bangalore, India</p></div>
+  </footer>
+
+  <script src="../assets/js/main.js?v=themes-3"></script>
+</body>
+</html>
